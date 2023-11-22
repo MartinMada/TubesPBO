@@ -8,6 +8,8 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,13 +18,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 
-public class GUIGuest {
+public class GUIRegister {
     private JFrame frame;
     private JPanel panel;
     private JMenuBar menubar;
     private JMenu menu1;
+    private JMenu menu2;
     private JLabel title;
     private JLabel labelName;
     private JLabel labelPass;
@@ -34,7 +39,7 @@ public class GUIGuest {
     private JTextField fieldPhone;
     private JButton registerbtn;
     
-    public GUIGuest(){
+    public GUIRegister(){
         frame = new JFrame("Guest");
         frame.setSize(550, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,11 +49,27 @@ public class GUIGuest {
         
         menubar = new JMenuBar();
         menu1 = new JMenu();
+        menu2 = new JMenu();
         menu1.setText("Home");
         menu1.setMnemonic(KeyEvent.VK_A);
-        menu1.getAccessibleContext().setAccessibleDescription(
-                "The only menu in this program that has menu items");
+        menu1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                new GUIHomeGuest();
+            }
+        });
+
+        menu2.setText("Sign In");
+        menu2.setMnemonic(KeyEvent.VK_A);
+        menu2.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                frame.dispose();
+                new GUILogin();
+            }
+        });
+        
         menubar.add(menu1);
+        menubar.add(menu2);
         
         title = new JLabel("REGISTER NOW");
         title.setFont(new java.awt.Font("Bookman Old Style", 1, 18));
@@ -116,7 +137,6 @@ public class GUIGuest {
         
         
     public static void main(String[] args) {
-        new GUIGuest();
+        new GUIRegister();
     }
-    
 }

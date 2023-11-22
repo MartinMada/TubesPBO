@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIHome {
+public class GUIHomeUser {
     private JFrame frame;
     private JPanel panel;
     private JLabel title;
@@ -43,7 +43,7 @@ public class GUIHome {
     private JMenuItem item7;
     
     
-    public GUIHome(){
+    public GUIHomeUser(){
         frame = new JFrame("Home");
         frame.setSize(900,700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,13 +115,15 @@ public class GUIHome {
         menubar.add(genre);
         
         userProfile = new JButton("Profile");
+        userProfile.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
         userProfile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                frame.dispose();
+                new GUIUserProfile();
             }
         });
-        panel.add(userProfile,new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, -1, -1));
+        panel.add(userProfile,new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 520, 200, 100));
         
         
         frame.add(panel);
@@ -131,6 +133,6 @@ public class GUIHome {
     
     
     public static void main(String[] args) {
-        new GUIHome();
+        new GUIHomeUser();
     }
 }

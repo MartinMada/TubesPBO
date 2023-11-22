@@ -29,7 +29,7 @@ public class GUIDetailBuku {
     
     public GUIDetailBuku(){
         frame = new JFrame("Detail Buku");
-        frame.setSize(1000, 700);
+        frame.setSize(800, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         panel = new JPanel();
@@ -37,13 +37,13 @@ public class GUIDetailBuku {
         LineBorder lb = new LineBorder(Color.BLACK);
         panel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), lb));
 
-        imgicon1 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\guts.jpg").getImage().getScaledInstance(400,800, Image.SCALE_DEFAULT)));
+        imgicon1 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         imgicon1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("Mouse clicked (# of clicks: " + e.getClickCount() + ")" + e);
             }
         });
-        panel.add(imgicon1,new org.netbeans.lib.awtextra.AbsoluteConstraints(30,30, 300, 300));
+        panel.add(imgicon1,new org.netbeans.lib.awtextra.AbsoluteConstraints(20,20, 200,300));
         
         
         frame.add(panel);
