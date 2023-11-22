@@ -1,3 +1,5 @@
+package model;
+
 public class Person {
     private long id;
     private String password;
