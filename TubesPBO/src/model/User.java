@@ -1,5 +1,7 @@
+package model;
+
 import java.util.ArrayList;
-import Enum.Genre;
+import model.Enum.Genre;
 public class User extends Person{
     private String bio;
     private ArrayList<Book> library;

@@ -1,7 +1,9 @@
+package model;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import Enum.Category;
-import Enum.Genre;
+import model.Enum.Category;
+import model.Enum.Genre;
 
 public class Book {
     private String isbn;
