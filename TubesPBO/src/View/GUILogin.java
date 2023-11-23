@@ -4,6 +4,9 @@
  */
 package View;
 
+import Controller.Controller;
+import Controller.DatabaseHandler;
+import model.Person;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -13,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.User;
 
 /**
  *
@@ -28,8 +32,10 @@ public class GUILogin {
     private JLabel labelPass;
     private JButton loginbtn;
     
+    static DatabaseHandler conn = new DatabaseHandler();
     
     public GUILogin(){
+        Controller cntrl = new Controller();
         frame = new JFrame("Login");
         frame.setSize(550, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,15 +65,14 @@ public class GUILogin {
         loginbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                Users user = getData();
-//                
-//                if (user != null && user.getPassword().equals(new String(fieldPass.getPassword()))) {
-//                    JOptionPane.showMessageDialog(null, "Login Sukses", "Info", JOptionPane.INFORMATION_MESSAGE);
-//                    frame.dispose();
-//                    new GUIGame();
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Login Gagal. Email atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
-//                }
+                User user = cntrl.getUser(fieldUsername.getText(),fieldPass.getPassword().toString());
+                if (user != null && user.getPassword().equals(new String(fieldPass.getPassword()))) {
+                    JOptionPane.showMessageDialog(null, "Login Sukses", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    frame.dispose();
+                    new GUIHomeUser();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Login Gagal. Email atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 
             }
         });
@@ -77,7 +82,9 @@ public class GUILogin {
         frame.setVisible(true);
         
     }
+    
+    
     public static void main(String[] args) {
-        
+        new GUILogin();
     }
 }

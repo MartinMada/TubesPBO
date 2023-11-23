@@ -69,9 +69,6 @@ public class GUIAdmin {
         panel.add(lihatUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 320, -1, -1));
         
         
-        
-        
-        
         frame.add(panel);
         frame.setVisible(true);
         
