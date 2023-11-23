@@ -50,17 +50,26 @@ public class Controller {
 //    }
 
     // SELECT WHERE
-    public Person getUser(String name, String password) {
+    public Person getUser(String email, String password) {
         conn.connect();
-        String query = "SELECT * FROM person WHERE name='" + name + "' AND pass='" + password + "'";
+        String query = "SELECT * FROM person WHERE email='" + email + "' AND pass='" + password + "'";
         Person person = null;
+        Person persontmp = null;
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                person = new Person(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getString("email"), rs.getString("phone"));
-                return person;                
+                person = new Person(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getString("email"), rs.getString("phone"));    
             }
+//            if (person != null) {
+//                Statement stmtUser = conn.con.createStatement();
+//                ResultSet rsUser = stmtUser.executeQuery("SELECT id FROM user WHERE id='" + person.getId() + "'");
+//                
+//                if (person.getId()== rsUser.getInt("id")) {
+//                    persontmp = new User(1,"password","name","email","phone","bio",)
+//                }
+//            }
+            return person;
         } catch (SQLException e) {
             e.printStackTrace();
         }
