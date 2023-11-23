@@ -20,7 +20,7 @@ import model.User;
 public class Access {
     public void login(String name, String password) {
         DatabaseHandler.getInstance().connect();
-        String query = "SELECT * FROM person WHERE email='" + name + "' AND password='" + password + "'";
+        String query = "SELECT * FROM person WHERE name='" + name + "' AND password='" + password + "'";
         Person person = null;
         try {
             Statement stmt = DatabaseHandler.getInstance().con.createStatement();
@@ -34,7 +34,7 @@ public class Access {
                 }
                 
                 if (person == null) {
-                    String checkUser = "SELECT * FROM person WHERE email='" + name + "' AND password='" + password + "'";
+                    String checkUser = "SELECT * FROM user WHERE id='" + rs.getInt("id") + "'";
                     Statement stmtCheckUser = DatabaseHandler.getInstance().con.createStatement();
                     ResultSet rsCheckUser = stmtCheckUser.executeQuery(checkUser);
                     while (rsCheckUser.next()) {

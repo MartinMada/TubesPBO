@@ -1,7 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-import Enum.CollectionStatus;
+import model.Enum.CollectionStatus;
 import java.time.LocalDate;
 
 public class Collection {
