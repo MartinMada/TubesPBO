@@ -5,12 +5,15 @@
 package View;
 
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,6 +23,12 @@ import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+import Controller.Controller;
+import Controller.DatabaseHandler;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
+import javax.swing.JPasswordField;
+import model.Person;
 
 
 public class GUIRegister {
@@ -34,14 +43,23 @@ public class GUIRegister {
     private JLabel labelEmail;
     private JLabel labelPhone;
     private JTextField fieldName;
-    private JTextField fieldPass;
+    private JPasswordField fieldPass;
     private JTextField fieldEmail;
     private JTextField fieldPhone;
     private JButton registerbtn;
+    private JButton fotobtn;
+    private JLabel foto;
+    private String pathFoto;
+    private JFileChooser pilihFoto;
+    private ImageIcon fotoIcon;
+    private Image fotoImg;
+    
+    static DatabaseHandler conn = new DatabaseHandler();
     
     public GUIRegister(){
+        Controller cntrl = new Controller();
         frame = new JFrame("Guest");
-        frame.setSize(550, 450);
+        frame.setSize(550, 550);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         panel = new JPanel();
@@ -86,7 +104,7 @@ public class GUIRegister {
         labelPass.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
         panel.add(labelPass,new org.netbeans.lib.awtextra.AbsoluteConstraints(50,130, -1, -1));
         
-        fieldPass = new JTextField();
+        fieldPass = new JPasswordField();
         panel.add(fieldPass,new org.netbeans.lib.awtextra.AbsoluteConstraints(50,150, 350, 20));
         
         labelEmail = new JLabel("Email");
@@ -103,25 +121,73 @@ public class GUIRegister {
         fieldPhone = new JTextField();
         panel.add(fieldPhone,new org.netbeans.lib.awtextra.AbsoluteConstraints(50,250, 350, 20));
         
+        foto = new JLabel("Pilih Foto");
+        foto.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
+        panel.add(foto,new org.netbeans.lib.awtextra.AbsoluteConstraints(50,280, 350, 20));
+        
+        fotobtn = new JButton("Choose a file!");
+        fotobtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showFileChooser();
+            }
+        });
+        panel.add(fotobtn,new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+        
         registerbtn = new JButton("Submit");
         registerbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean isValid = registerConfirm(fieldName,fieldPass,fieldEmail,fieldPhone);
-                if (isValid) {
-                    frame.dispose();
-                    JOptionPane.showMessageDialog(null,"Berhasil","Info",JOptionPane.INFORMATION_MESSAGE);
-                    //insert database
-                }else{
-                    JOptionPane.showMessageDialog(null,"Silahkan isi semua data!","Error",JOptionPane.ERROR_MESSAGE);
-                }
+               
             }
         });
-        panel.add(registerbtn,new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        panel.add(registerbtn,new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
         
+//        fieldName.addKeyListener(new KeyListener() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//                // Metode ini dipanggil ketika sebuah karakter diketik (termasuk karakter spasi)
+//                System.out.println("Key Typed: " + e.getKeyChar());
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                // Metode ini dipanggil ketika sebuah tombol ditekan
+////                System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {
+//                // Metode ini dipanggil ketika sebuah tombol dilepas
+////                System.out.println("Key Released: " + KeyEvent.getKeyText(e.getKeyCode()));
+//            }
+//        });
         frame.add(panel);
         frame.setJMenuBar(menubar);
         frame.setVisible(true);
+    }
+    public void showFileChooser() {
+        pilihFoto = new JFileChooser();
+        pilihFoto.setDialogTitle("Choose a file");
+
+        int result = pilihFoto.showOpenDialog(panel);
+        
+        if (result == JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(panel, "File yang dipilih: " + pilihFoto.getSelectedFile().getAbsolutePath());
+            pathFoto = pilihFoto.getSelectedFile().getAbsolutePath();
+            fotoIcon = new ImageIcon(pathFoto);
+            fotoImg = fotoIcon.getImage();
+            Image fotoRes = fotoImg.getScaledInstance(100,100 , Image.SCALE_SMOOTH);
+            ImageIcon newFotoRes = new ImageIcon(fotoRes);
+
+            JLabel labelFoto = new JLabel();
+            labelFoto.setIcon(newFotoRes);
+            panel.add(labelFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140,610, 100));
+            panel.revalidate();
+            panel.repaint();
+        } else if (result == JFileChooser.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(panel, "Pemilihan file dibatalkan");
+        }
     }
     public boolean registerConfirm(Component... components){
         for (Component component : components) {
