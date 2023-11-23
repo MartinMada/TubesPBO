@@ -5,16 +5,13 @@ import model.Enum.Genre;
 public class User extends Person{
     private String bio;
     private ArrayList<Book> library;
-    private ArrayList<Genre> preferredGenre;
     private int warning;
     
     
-    public User(long id, String password, String name, String email, String phone, String bio, ArrayList<Book> library,
-            ArrayList<Genre> preferredGenre, int warning) {
-        super(id, password, name, email, phone);
+    public User(long id, String password, String name, String email, String phone, String picPath, String bio, ArrayList<Book> library, int warning) {
+        super(id, password, name, email, phone, picPath);
         this.bio = bio;
         this.library = library;
-        this.preferredGenre = preferredGenre;
         this.warning = warning;
     }    
 
@@ -32,14 +29,6 @@ public class User extends Person{
 
     public void setLibrary(ArrayList<Book> library) {
         this.library = library;
-    }
-
-    public ArrayList<Genre> getPreferredGenre() {
-        return preferredGenre;
-    }
-
-    public void setPreferredGenre(ArrayList<Genre> preferredGenre) {
-        this.preferredGenre = preferredGenre;
     }
 
     public int getWarning() {
