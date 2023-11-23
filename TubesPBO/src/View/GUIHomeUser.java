@@ -82,7 +82,8 @@ public class GUIHomeUser {
         imgicon2 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         imgicon2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Mouse clicked (# of clicks: " + e.getClickCount() + ")" + e);
+                frame.dispose();
+                new GUIDetailBuku();
             }
         });
         panel.add(imgicon2,new org.netbeans.lib.awtextra.AbsoluteConstraints(280,160, 300, 300));
