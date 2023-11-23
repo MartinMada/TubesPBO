@@ -65,13 +65,14 @@ public class GUILogin {
         loginbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                User user = cntrl.getUser(fieldUsername.getText(),fieldPass.getPassword().toString());
-                if (user != null && user.getPassword().equals(new String(fieldPass.getPassword()))) {
+                Person person = cntrl.getUser(fieldUsername.getText(),fieldPass.getPassword().toString());
+                if (person != null && person.getPassword().equals(new String(fieldPass.getPassword()))) {
                     JOptionPane.showMessageDialog(null, "Login Sukses", "Info", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
                     new GUIHomeUser();
                 } else {
                     JOptionPane.showMessageDialog(null, "Login Gagal. Email atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
+                    frame.dispose();
                 }
                 
             }
