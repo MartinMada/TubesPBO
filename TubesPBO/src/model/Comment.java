@@ -10,6 +10,9 @@ public class Comment {
     private LocalDate date;
     private ArrayList<Comment> comment;
 
+    public Comment(){
+    }
+
     public Comment(long idComment, long idUser, String content, LocalDate date, ArrayList<Comment> comment) {
         this.idComment = idComment;
         this.idUser = idUser;

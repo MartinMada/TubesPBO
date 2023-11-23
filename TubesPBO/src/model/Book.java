@@ -17,6 +17,9 @@ public class Book {
     private ArrayList<BookQueue> queue;
     private ArrayList<History> history;
     
+    public Book() {
+    }
+
     public Book(String isbn, LocalDateTime year, String title, ArrayList<Genre> genre, Category category, String author,
             int stock, ArrayList<Review> review, ArrayList<BookQueue> queue, ArrayList<History> history) {
         this.isbn = isbn;

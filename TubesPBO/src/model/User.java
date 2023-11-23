@@ -8,7 +8,9 @@ public class User extends Person{
     private ArrayList<Genre> preferredGenre;
     private int warning;
     
-    
+    public User() {
+    }
+
     public User(long id, String password, String name, String email, String phone, String bio, ArrayList<Book> library,
             ArrayList<Genre> preferredGenre, int warning) {
         super(id, password, name, email, phone);

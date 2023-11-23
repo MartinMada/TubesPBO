@@ -7,6 +7,9 @@ public class Person {
     private String email;
     private String phone;
 
+    public Person(){
+    }
+    
     public Person(long id, String password, String name, String email, String phone) {
         this.id = id;
         this.password = password;
