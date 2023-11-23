@@ -26,9 +26,9 @@ public class GUILogin {
     private JFrame frame;
     private JPanel panel;
     private JLabel title;
-    private JTextField fieldUsername;
+    private JTextField fieldEmail;
     private JPasswordField fieldPass;
-    private JLabel labelUsername;
+    private JLabel labelEmail;
     private JLabel labelPass;
     private JButton loginbtn;
     
@@ -47,12 +47,12 @@ public class GUILogin {
         title.setFont(new java.awt.Font("Bookman Old Style", 1, 18));
         panel.add(title,new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
         
-        labelUsername = new JLabel("Username");
-        labelUsername.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
-        panel.add(labelUsername,new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+        labelEmail = new JLabel("Username");
+        labelEmail.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
+        panel.add(labelEmail,new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
         
-        fieldUsername = new JTextField();
-        panel.add(fieldUsername,new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 300, 20));
+        fieldEmail = new JTextField();
+        panel.add(fieldEmail,new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 300, 20));
         
         labelPass = new JLabel("Password");
         labelPass.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
@@ -65,8 +65,9 @@ public class GUILogin {
         loginbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Person person = cntrl.getUser(fieldUsername.getText(),fieldPass.getPassword().toString());
-                if (person != null && person.getPassword().equals(new String(fieldPass.getPassword()))) {
+                
+                Person person = cntrl.getUser(fieldEmail.getText(),String.valueOf(fieldPass.getPassword()));
+                if (person != null) {
                     JOptionPane.showMessageDialog(null, "Login Sukses", "Info", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
                     new GUIHomeUser();

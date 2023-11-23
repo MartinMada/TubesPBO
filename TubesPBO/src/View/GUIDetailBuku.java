@@ -36,11 +36,13 @@ public class GUIDetailBuku {
     private JLabel labelPenulis;
     private JLabel labelTterbit;
     private JLabel labelKategori;
+    private JLabel labelSinopsis;
     private JLabel ISBN;
     private JButton btnpinjam;
     private JButton btnantri;
     private JMenuBar menubar;
     private JMenu menu1;
+    private JButton ulasan;
     
     
     
@@ -75,6 +77,18 @@ public class GUIDetailBuku {
         labelPenulis.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
         panel.add(labelPenulis, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
         
+        labelKategori = new JLabel("Kategori");
+        labelKategori.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
+        panel.add(labelKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
+        
+        labelTterbit = new JLabel("Tahun Terbit");
+        labelTterbit.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
+        panel.add(labelTterbit, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, -1, -1));
+        
+        labelSinopsis = new JLabel("Sinopsis");
+        labelSinopsis.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
+        panel.add(labelSinopsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
+        
         btnpinjam = new JButton("PINJAM");
         btnpinjam.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
         btnpinjam.addActionListener(new ActionListener() {
@@ -106,6 +120,17 @@ public class GUIDetailBuku {
             }
         });
         menubar.add(menu1);
+        
+        ulasan = new JButton("Lihat Ulasan");
+        ulasan.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
+        ulasan.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new GUIReview();
+            }
+        });
+        panel.add(ulasan,new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
+
         
         
         frame.add(panel);
