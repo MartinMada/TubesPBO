@@ -50,36 +50,21 @@ public class Controller {
 //    }
 
     // SELECT WHERE
-    public User getUser(String name, String password) {
+    public Person getUser(String name, String password) {
         conn.connect();
-        String query = "SELECT * FROM user JOIN person p ON user.id = p.id WHERE p.name='" + name + "'&&p.pass='" + password + "'";
-        ArrayList<Book> library = new ArrayList<>();
-        ArrayList<Genre> preferredGenre = new ArrayList<>();
-        long id = 123456;
-        String pass = "password123";
-        String username = "John Doe";
-        String email = "john.doe@example.com";
-        String phone = "123-456-7890";
-        String bio = "Hello, I love reading!";
-        int warning = 0;
-
-        User user = new User(id, password, name, email, phone, bio, library, preferredGenre, warning);
-
+        String query = "SELECT * FROM person WHERE name='" + name + "' AND pass='" + password + "'";
+        Person person = null;
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                user.setId(rs.getInt("id"));
-                user.setBio(rs.getString("bio"));
-//                user.(rs.getString("Address"));
-//                user.setPhone(rs.getString("Phone"));
-//                user.setAge(rs.getInt("Age"));
+                person = new Person(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getString("email"), rs.getString("phone"));
+                return person;                
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        conn.disconnect();
-        return (user);
+        return (person);
     }
     
     // INSERT
