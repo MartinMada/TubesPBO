@@ -55,6 +55,7 @@ public class Person {
 
     public void setPhone(String phone) {
         this.phone = phone;
+
     }      
 
     public String getPicPath() {
@@ -64,5 +65,5 @@ public class Person {
     public void setPicPath(String picPath) {
         this.picPath = picPath;
     }
-    
+
 }
