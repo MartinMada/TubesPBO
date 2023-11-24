@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
-import Controller.Controller;
+import Controller.Access;
 import Controller.DatabaseHandler;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyListener;
@@ -57,7 +57,7 @@ public class GUIRegister {
     static DatabaseHandler conn = new DatabaseHandler();
     
     public GUIRegister(){
-        Controller cntrl = new Controller();
+        Access cntrl = new Access();
         frame = new JFrame("Guest");
         frame.setSize(550, 550);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

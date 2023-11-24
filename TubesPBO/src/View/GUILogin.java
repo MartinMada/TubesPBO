@@ -4,7 +4,7 @@
  */
 package View;
 
-import Controller.Controller;
+import Controller.Access;
 import Controller.DatabaseHandler;
 import model.Person;
 import java.awt.event.ActionEvent;
@@ -35,7 +35,7 @@ public class GUILogin {
     static DatabaseHandler conn = new DatabaseHandler();
     
     public GUILogin(){
-        Controller cntrl = new Controller();
+        Access cntrl = new Access();
         frame = new JFrame("Login");
         frame.setSize(550, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

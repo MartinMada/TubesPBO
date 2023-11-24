@@ -4,7 +4,7 @@
  */
 package View;
 
-import Controller.Controller;
+import Controller.Access;
 import model.Person;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +33,7 @@ public class GUIUserProfile {
     
     
     public GUIUserProfile(){
-        Controller cntrl = new Controller();
+        Access cntrl = new Access();
         frame = new JFrame("User Profile");
         frame.setSize(600,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
