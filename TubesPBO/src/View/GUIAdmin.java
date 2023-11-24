@@ -26,19 +26,11 @@ public class GUIAdmin {
     private JLabel titleMainMenu;
     private JButton lihatBuku;
     private JButton lihatUser;
-    private JButton addBook;
-    private JButton editBook;
-    private JButton deleteBook;
-//    private JTextField fieldISBN;
-//    private JTextField fieldJudul;
-//    private JTextField fieldPenulis;
-//    private JTextField fieldTahunTerbit;
-//    private JTextField fieldGenre;
-    private JButton simpan;
+    
     
     public GUIAdmin(){
         frame = new JFrame("Home Admin");
-        frame.setSize(500, 500);
+        frame.setSize(500, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         panel = new JPanel();
@@ -46,27 +38,33 @@ public class GUIAdmin {
         
         title = new JLabel("Admin Perpustakaan");
         title.setFont(new java.awt.Font("Bookman Old Style", 1, 20));
-        panel.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        panel.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
         
         titleMainMenu = new JLabel("Main Menu");
         titleMainMenu.setFont(new java.awt.Font("Bookman Old Style", 1, 18));
-        panel.add(titleMainMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
+        panel.add(titleMainMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
         
-        addBook = new JButton("Tambah Buku");
-        addBook.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
-        panel.add(addBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
+        lihatBuku = new JButton("VIEW BOOKS");
+        lihatBuku.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
+        lihatBuku.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                new GUIBookList();
+            }
+        });
+        panel.add(lihatBuku, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 140, 200, 50));
         
-        editBook = new JButton("Edit Buku");
-        editBook.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
-        panel.add(editBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
-        
-        deleteBook = new JButton("Hapus Buku");
-        deleteBook.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
-        panel.add(deleteBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 260, -1, -1));
-        
-        lihatUser = new JButton("Lihat User");
+        lihatUser = new JButton("VIEW USER");
         lihatUser.setFont(new java.awt.Font("Bookman Old Style", 1, 14));
-        panel.add(lihatUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 320, -1, -1));
+        lihatUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+        panel.add(lihatUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 220, 200, 50));
+        
         
         
         frame.add(panel);

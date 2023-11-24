@@ -4,6 +4,8 @@
  */
 package View;
 
+import Controller.Controller;
+import model.Person;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -31,6 +33,7 @@ public class GUIUserProfile {
     
     
     public GUIUserProfile(){
+        Controller cntrl = new Controller();
         frame = new JFrame("User Profile");
         frame.setSize(600,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

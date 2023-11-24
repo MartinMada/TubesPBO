@@ -22,6 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -44,10 +49,7 @@ public class GUIDetailBuku {
     private JMenu menu1;
     private JButton ulasan;
     
-    
-    
-    
-    public GUIDetailBuku(){
+    public GUIDetailBuku(String ISBN,String pic_path){
         frame = new JFrame("Detail Buku");
         frame.setSize(800, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,12 +59,7 @@ public class GUIDetailBuku {
         LineBorder lb = new LineBorder(Color.BLACK);
         panel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), lb));
 
-        imgicon1 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
-//        imgicon1.addMouseListener(new MouseAdapter() {
-//            public void mouseClicked(MouseEvent e) {
-//                System.out.println("Mouse clicked (# of clicks: " + e.getClickCount() + ")" + e);
-//            }
-//        });
+        imgicon1 = new JLabel(new ImageIcon(new ImageIcon(getImagePathFromDatabase(ISBN)).getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         panel.add(imgicon1,new org.netbeans.lib.awtextra.AbsoluteConstraints(20,20, 200,300));
         
         labelJudul = new JLabel("Judul");
@@ -131,14 +128,53 @@ public class GUIDetailBuku {
         });
         panel.add(ulasan,new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
-        
+        fetchDataFromDatabase(ISBN);
         
         frame.add(panel);
         frame.setJMenuBar(menubar);
         frame.setVisible(true);
    } 
+    private void fetchDataFromDatabase(String isbn) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubespbo", "root", "")) {
+            String query = "SELECT * FROM book WHERE isbn = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, isbn);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        // Set the data to the labels or fields in the GUI
+                        labelJudul.setText("Judul: " + resultSet.getString("title"));
+                        labelGenre.setText("Genre: " + resultSet.getString("genre"));
+                        labelPenulis.setText("Penulis: " + resultSet.getString("author"));
+                        labelKategori.setText("Kategori: " + resultSet.getString("category"));
+                        labelTterbit.setText("Tahun Terbit: " + resultSet.getString("year"));
+                        labelSinopsis.setText("Sinopsis: " + resultSet.getString("sinopsis"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private String getImagePathFromDatabase(String isbn) {
+        String picPath = null;
+        try ( Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubespbo", "root", "")) {
+            String query = "SELECT pic_path FROM book WHERE isbn=?";
+            try ( PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, isbn);
+                try ( ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        picPath = resultSet.getString("pic_path");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return picPath;
+    }
+
     public static void main(String[] args) {
-        new GUIDetailBuku();
+        new GUIDetailBuku("isbn","pic_path");
     }
  
 }

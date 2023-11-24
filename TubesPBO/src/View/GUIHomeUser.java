@@ -20,6 +20,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GUIHomeUser {
     private JFrame frame;
@@ -41,6 +46,8 @@ public class GUIHomeUser {
     private JMenuItem item5;
     private JMenuItem item6;
     private JMenuItem item7;
+    private String isbn;
+    private String imagePath;
     
     
     public GUIHomeUser(){
@@ -71,10 +78,13 @@ public class GUIHomeUser {
         labelCollection1.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
         panel.add(labelCollection1,new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 400, 20));
         
-        imgicon1 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\guts.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
+        imgicon1 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         imgicon1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Mouse clicked (# of clicks: " + e.getClickCount() + ")" + e);
+                frame.dispose();
+                isbn = "978-0-123-45678-9";
+                imagePath = getImagePathFromDatabase(isbn);
+                new GUIDetailBuku(isbn,imagePath);
             }
         });
         panel.add(imgicon1,new org.netbeans.lib.awtextra.AbsoluteConstraints(50,160, 300, 300));
@@ -83,15 +93,20 @@ public class GUIHomeUser {
         imgicon2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
-                new GUIDetailBuku();
+                isbn = "978-0-444-56789-0";
+                imagePath = getImagePathFromDatabase(isbn);
+                new GUIDetailBuku(isbn,imagePath);
             }
         });
         panel.add(imgicon2,new org.netbeans.lib.awtextra.AbsoluteConstraints(280,160, 300, 300));
         
-        imgicon3 = new JLabel(new ImageIcon(new ImageIcon("C:\\Users\\marti\\OneDrive\\Gambar\\guts.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
+        imgicon3 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         imgicon3.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Mouse clicked (# of clicks: " + e.getClickCount() + ")" + e);
+                frame.dispose();
+                isbn = "978-0-555-12345-6";
+                imagePath = getImagePathFromDatabase(isbn);
+                new GUIDetailBuku(isbn,imagePath);
             }
         });
         panel.add(imgicon3,new org.netbeans.lib.awtextra.AbsoluteConstraints(510,160, 300, 300));
@@ -131,7 +146,23 @@ public class GUIHomeUser {
         frame.setJMenuBar(menubar);
         frame.setVisible(true);
     }
-    
+    private String getImagePathFromDatabase(String isbn) {
+        String picPath = null;
+        try ( Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/tubespbo", "root", "")) {
+            String query = "SELECT pic_path FROM book WHERE isbn=?";
+            try ( PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, isbn);
+                try ( ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        picPath = resultSet.getString("pic_path");
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return picPath;
+    }
     
     public static void main(String[] args) {
         new GUIHomeUser();
