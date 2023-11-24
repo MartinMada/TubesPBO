@@ -18,7 +18,7 @@ public class Review {
         this.comment = comment;
     }
 
-    public long getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
