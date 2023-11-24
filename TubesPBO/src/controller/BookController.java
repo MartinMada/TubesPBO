@@ -199,6 +199,7 @@ public class BookController {
     }
     
     public boolean addBookQueue (Book book, User user) {
+        if (ableToBorrow(book)) {return false;}
         DatabaseHandler.getInstance().connect();
         String query = "INSERT INTO bookqueue (isbn, id_user, date_borrow) VALUES(?,?,?)";
         try {
