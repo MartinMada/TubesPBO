@@ -177,7 +177,7 @@ public class BookController {
     public boolean ableToBorrow(Book book) {
         updateListBorrow();
         DatabaseHandler.getInstance().connect();
-        String querySelect = "SELECT COUNT(id_list_borrow) AS result FROM listborrow WHERE isbn='"+ book.getIsbn() +"' TIMESTAMPDIFF(SECOND, date_borrow, NOW())<432000 AND date_return = NULL;";
+        String querySelect = "SELECT COUNT(id_list_borrow) AS result FROM listborrow WHERE isbn='"+ book.getIsbn() +"' AND TIMESTAMPDIFF(SECOND, date_borrow, NOW())<432000 AND date_return = NULL;";
         
         try {
             Statement stmt = DatabaseHandler.getInstance().con.createStatement();
