@@ -78,7 +78,7 @@ public class GUIHomeUser {
         labelCollection1.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
         panel.add(labelCollection1,new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 400, 20));
         
-        imgicon1 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
+        imgicon1 = new JLabel(new ImageIcon(new ImageIcon("src\\gambar\\action\\The Spirit Glass.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         imgicon1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
@@ -89,7 +89,7 @@ public class GUIHomeUser {
         });
         panel.add(imgicon1,new org.netbeans.lib.awtextra.AbsoluteConstraints(50,160, 300, 300));
         
-        imgicon2 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
+        imgicon2 = new JLabel(new ImageIcon(new ImageIcon("src\\gambar\\comedy\\Spy×Family 12.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         imgicon2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();
@@ -100,7 +100,7 @@ public class GUIHomeUser {
         });
         panel.add(imgicon2,new org.netbeans.lib.awtextra.AbsoluteConstraints(280,160, 300, 300));
         
-        imgicon3 = new JLabel(new ImageIcon(new ImageIcon("src\\image\\percyjackson.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
+        imgicon3 = new JLabel(new ImageIcon(new ImageIcon("src\\gambar\\fantasy\\Sword Catcher.jpg").getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT)));
         imgicon3.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 frame.dispose();

@@ -111,7 +111,7 @@ public class GUIBookList extends JFrame {
     }
     private void openDetailsFrame(String isbn) {
         dispose();
-        new GUIDetailBuku(selectedISBN,imagePath);
+        new GUIDetailBukuAdmin(selectedISBN,imagePath);
     }
 
     public static void main(String[] args) {
