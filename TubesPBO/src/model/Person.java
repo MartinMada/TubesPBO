@@ -1,25 +1,27 @@
 package model;
 
 public class Person {
-    private long id;
+    private int id;
     private String password;
     private String name;
     private String email;
     private String phone;
+    private String pic_path;
 
-    public Person(long id, String password, String name, String email, String phone) {
+    public Person(int id, String password, String name, String email, String phone, String pic_path) {
         this.id = id;
         this.password = password;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.pic_path = pic_path;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -54,4 +56,12 @@ public class Person {
     public void setPhone(String phone) {
         this.phone = phone;
     }        
+
+    public String getPic_Path() {
+        return pic_path;
+    }
+
+    public void setpic_path(String pic_path) {
+        this.pic_path = pic_path;
+    } 
 }

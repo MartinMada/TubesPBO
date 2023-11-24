@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controller;
+package controller;
 
 import model.*;
 import java.sql.PreparedStatement;
@@ -52,14 +52,14 @@ public class Controller {
     // SELECT WHERE
     public Person getUser(String email, String password) {
         conn.connect();
-        String query = "SELECT * FROM person WHERE email='" + email + "' AND pass='" + password + "'";
+        String query = "SELECT * FROM person WHERE email='" + email + "' AND password='" + password + "'";
         Person person = null;
         Person persontmp = null;
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                person = new Person(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getString("email"), rs.getString("phone"), rs.getString("pic_path"));    
+                person = new Person(rs.getInt("id"), rs.getString("password"), rs.getString("name"), rs.getString("email"), rs.getString("phone"), rs.getString("pic_path"));    
             }
 //            if (person != null) {
 //                Statement stmtUser = conn.con.createStatement();

@@ -6,14 +6,18 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author marti
+ */
 public class DatabaseHandler {
 
     public Connection con;
     private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost/database_test";
+    private String url = "jdbc:mysql://localhost/tubespbo";
+//    private String url = "jdbc:mysql://localhost/db_test?serverTimezone=" + TimeZone.getDefault().getID();
     private String username = "root";
     private String password = "";
 
@@ -57,3 +61,4 @@ public class DatabaseHandler {
         }
     }
 }
+
