@@ -39,7 +39,7 @@ public class Register {
                 tmpId = rs2.getInt("id");
             }
             
-            String query3 = "INSERT INTO user (id, bio, warning) VALUES(?,?,?,?,?)";
+            String query3 = "INSERT INTO user (id, bio, warning) VALUES(?,?,?)";
             PreparedStatement stmt3 =  DatabaseHandler.getInstance().con.prepareStatement(query3);
             stmt3.setInt(1, tmpId);
             stmt3.setString(2, user.getBio());
