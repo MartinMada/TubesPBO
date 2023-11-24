@@ -25,6 +25,7 @@ import model.User;
  * @author Darren
  */
 public class BookController {
+    //Method searchBook berdasarkan tipe(dari enum), search merupakan value dari enum(hanya bisa satu), dan user bisa diisi null atau jika diambil dari user yang login(bisa ambil dari singleton manager) maka akan mencari buku yang saat ini tidak dipinjam
     public ArrayList<Book> searchBook(SearchType type, String search, User user){
         DatabaseHandler.getInstance().connect();
         ArrayList<Book> result = new ArrayList<>();
@@ -58,7 +59,7 @@ public class BookController {
         }
         return result;
     }
-    
+    //Method searchBook dengan parameter isbn hanya mengembalikan satu buku
     public Book searchBook(String isbn){
         DatabaseHandler.getInstance().connect();
         Book result = null;
@@ -89,12 +90,12 @@ public class BookController {
         }
         return result;
     }
-    
+    //Method getListBorrow dengan parameter user, mengembalikan buku(BorrowedBook) yang sedang dipinjam oleh user
     public ArrayList<Book> getListBorrow (User user) {
         updateListBorrow();
         DatabaseHandler.getInstance().connect();
         ArrayList<Book> result = new ArrayList<>();
-        String querySelect = "SELECT lb.id_list_borrow, lb.isbn, (SELECT year FROM book WHERE isbn = lb.isbn) AS book_year, (SELECT title FROM book WHERE isbn = lb.isbn) AS book_title, (SELECT genre FROM book WHERE isbn = lb.isbn) AS book_genre, (SELECT category FROM book WHERE isbn = lb.isbn) AS book_category, (SELECT author FROM book WHERE isbn = lb.isbn) AS book_author, (SELECT stock FROM book WHERE isbn = lb.isbn) AS book_stock, (SELECT pic_path FROM book WHERE isbn = lb.isbn) AS book_pic_path, lb.date_borrow, lb.date_return FROM listborrow lb WHERE lb.id_user='" + user.getId() + "' AND TIMESTAMPDIFF(SECOND, lb.date_borrow, NOW())<432000)";
+        String querySelect = "SELECT lb.id_list_borrow, lb.isbn, (SELECT year FROM book WHERE isbn = lb.isbn) AS book_year, (SELECT title FROM book WHERE isbn = lb.isbn) AS book_title, (SELECT genre FROM book WHERE isbn = lb.isbn) AS book_genre, (SELECT category FROM book WHERE isbn = lb.isbn) AS book_category, (SELECT author FROM book WHERE isbn = lb.isbn) AS book_author, (SELECT stock FROM book WHERE isbn = lb.isbn) AS book_stock, (SELECT pic_path FROM book WHERE isbn = lb.isbn) AS book_pic_path, lb.date_borrow, lb.date_return FROM listborrow lb WHERE lb.id_user='" + user.getId() + "' AND TIMESTAMPDIFF(SECOND, lb.date_borrow, NOW())<432000 AND lb.date_return=NULL)";
     
         try {
             
@@ -121,8 +122,8 @@ public class BookController {
         }
         return result;
     }
-    
-    public void updateListBorrow () {
+    //Method pembantu getListBorrow dan ableToBorrow, untuk update listborrow database jika ada listborrow yang lebih dari 5 hari, dilakukan pengecekan queue buku tersebut
+    private void updateListBorrow () {
         DatabaseHandler.getInstance().connect();
         String querySelect = "SELECT id_list_borrow, isbn FROM listborrow WHERE TIMESTAMPDIFF(SECOND, date_borrow, NOW())>=432000 AND date_return = NULL;";
         
@@ -139,7 +140,7 @@ public class BookController {
         }
 
     }
-    
+    //Method ableToBorrow mengecek apakah bisa meminjam buku tersebut
     public boolean ableToBorrow(Book book) {
         updateListBorrow();
         DatabaseHandler.getInstance().connect();
@@ -159,7 +160,7 @@ public class BookController {
         }
         return false;
     }
-    
+    //Method returnBook yang merupakan aksi dari user(bukan karena lewat 5 hari), setelah return, dilakukan juga pengecekan queue
     public boolean returnBook (BorrowedBook borrowedBook) {
         DatabaseHandler.getInstance().connect();
         String querySelect = "SELECT id_list_borrow, isbn FROM listborrow WHERE id_list_borrow = " + borrowedBook.getIdListBorrow() + ";";
@@ -179,7 +180,7 @@ public class BookController {
         }
         return false;
     }
-    
+    //Method untuk meminjam buku, dilakukan ableToBorrow(), jika bisa maka langsung insert data ke database
     public boolean borrowBook (Book book, User user) {
         if (!ableToBorrow(book)) {return false;}
         DatabaseHandler.getInstance().connect();
@@ -197,7 +198,7 @@ public class BookController {
             return (false);
         }
     }
-    
+    //Method untuk mengantri jika diluar method ini dilakukan pengecekan ableToBorrow dan hasilnya false, maka tampilkan tombol mengantri dan isinya memanggil method ini
     public boolean addBookQueue (Book book, User user) {
         if (ableToBorrow(book)) {return false;}
         DatabaseHandler.getInstance().connect();
