@@ -90,6 +90,36 @@ public class BookController {
         }
         return result;
     }
+    //Method getPopularBook untuk mendapatkan 5 buku terbanyak dipinjam
+    public ArrayList<Book> getPopularBook(){
+        DatabaseHandler.getInstance().connect();
+        ArrayList<Book> result = new ArrayList<>();
+        
+        String query = "SELECT lb.isbn, (SELECT b.`year` FROM book b WHERE isbn = lb.isbn) AS `year`, (SELECT b.title FROM book b WHERE isbn = lb.isbn) AS title, (SELECT b.genre FROM book b WHERE isbn = lb.isbn) AS genre, (SELECT b.category FROM book b WHERE isbn = lb.isbn) AS category, (SELECT b.author FROM book b WHERE isbn = lb.isbn) AS author, (SELECT b.stock FROM book b WHERE isbn = lb.isbn) AS stock, (SELECT b.pic_path FROM book b WHERE isbn = lb.isbn) AS pic_path FROM listborrow lb GROUP BY lb.isbn ORDER BY COUNT(lb.isbn) DESC LIMIT 5;";
+        try {
+            Statement stmt = DatabaseHandler.getInstance().con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Genre genreTmp = Genre.ACTION;
+                for(Genre genreLoop : Genre.values()) {
+                    if(genreLoop.toString().equals(rs.getString("genre"))) {
+                        genreTmp = genreLoop;
+                    }
+                }
+                
+                Category categoryTmp = Category.FICTION;
+                for(Category categoryLoop : Category.values()) {
+                    if(categoryLoop.toString().equals(rs.getString("category"))) {
+                        categoryTmp = categoryLoop;
+                    }
+                }
+                result.add(new Book(rs.getString("isbn"), rs.getInt("year"), rs.getString("title"), genreTmp, categoryTmp, rs.getString("author"), rs.getInt("stock"), rs.getString("pic_path"), null, null, null));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     //Method getListBorrow dengan parameter user, mengembalikan buku(BorrowedBook) yang sedang dipinjam oleh user
     public ArrayList<Book> getListBorrow (User user) {
         updateListBorrow();
