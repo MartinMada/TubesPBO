@@ -1,13 +1,13 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class History {
-    private long idUser;
-    private LocalDate dateBorrow;
-    private LocalDate dateReturn;
+    private int idUser;
+    private LocalDateTime dateBorrow;
+    private LocalDateTime dateReturn;
 
-    public History(long idUser, LocalDate dateBorrow, LocalDate dateReturn) {
+    public History(int idUser, LocalDateTime dateBorrow, LocalDateTime dateReturn) {
         this.idUser = idUser;
         this.dateBorrow = dateBorrow;
         this.dateReturn = dateReturn;
@@ -17,23 +17,23 @@ public class History {
         return idUser;
     }
 
-    public void setIdUser(long idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
-    public LocalDate getDateBorrow() {
+    public LocalDateTime getDateBorrow() {
         return dateBorrow;
     }
 
-    public void setDateBorrow(LocalDate dateBorrow) {
+    public void setDateBorrow(LocalDateTime dateBorrow) {
         this.dateBorrow = dateBorrow;
     }
 
-    public LocalDate getDateReturn() {
+    public LocalDateTime getDateReturn() {
         return dateReturn;
     }
 
-    public void setDateReturn(LocalDate dateReturn) {
+    public void setDateReturn(LocalDateTime dateReturn) {
         this.dateReturn = dateReturn;
     }            
 }

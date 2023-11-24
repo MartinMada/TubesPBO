@@ -17,6 +17,7 @@ import model.BorrowedBook;
 import model.Enum.Category;
 import model.Enum.Genre;
 import model.Enum.SearchType;
+import model.History;
 import model.Person;
 import model.User;
 
@@ -244,6 +245,23 @@ public class BookController {
             ex.printStackTrace();
             return (false);
         }
+    }
+    //Method getBookHistory mendapatkan seluruh riwayat peminjaman buku
+    public ArrayList<History> getBookHistory (Book book) {
+        DatabaseHandler.getInstance().connect();
+        ArrayList<History> result = new ArrayList<>();
+        
+        String query = "SELECT * FROM listborrow WHERE isbn='" + book.getIsbn() + "'";
+        try {
+            Statement stmt = DatabaseHandler.getInstance().con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                result.add(new History(rs.getInt("id_user"), rs.getTimestamp("date_borrow").toLocalDateTime(), rs.getTimestamp("date_return").toLocalDateTime()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
     
 }
