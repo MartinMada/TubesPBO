@@ -4,8 +4,8 @@
  */
 package View;
 
-import controller.Controller;
-import controller.DatabaseHandler;
+import Controller.Controller;
+import Controller.DatabaseHandler;
 import model.Person;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

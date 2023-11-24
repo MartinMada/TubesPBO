@@ -4,7 +4,7 @@
  */
 package View;
 
-import controller.Controller;
+import Controller.Controller;
 import model.Person;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
