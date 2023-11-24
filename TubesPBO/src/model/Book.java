@@ -7,18 +7,19 @@ import model.Enum.Genre;
 
 public class Book {
     private String isbn;
-    private LocalDateTime year;
+    private int year;
     private String title;
-    private ArrayList<Genre> genre;
+    private Genre genre;
     private Category category;
     private String author;
     private int stock;
+    private String picPath;
     private ArrayList<Review> review;
     private ArrayList<BookQueue> queue;
     private ArrayList<History> history;
     
-    public Book(String isbn, LocalDateTime year, String title, ArrayList<Genre> genre, Category category, String author,
-            int stock, ArrayList<Review> review, ArrayList<BookQueue> queue, ArrayList<History> history) {
+    public Book(String isbn, int year, String title, Genre genre, Category category, String author,
+            int stock, String picPath, ArrayList<Review> review, ArrayList<BookQueue> queue, ArrayList<History> history) {
         this.isbn = isbn;
         this.year = year;
         this.title = title;
@@ -26,6 +27,7 @@ public class Book {
         this.category = category;
         this.author = author;
         this.stock = stock;
+        this.picPath = picPath;
         this.review = review;
         this.queue = queue;
         this.history = history;
@@ -39,11 +41,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public LocalDateTime getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(LocalDateTime year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -55,11 +57,11 @@ public class Book {
         this.title = title;
     }
 
-    public ArrayList<Genre> getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(ArrayList<Genre> genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
@@ -85,6 +87,14 @@ public class Book {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getPicPath() {
+        return picPath;
+    }
+
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
     }
 
     public ArrayList<Review> getReview() {

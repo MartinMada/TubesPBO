@@ -10,10 +10,10 @@ import model.Enum.Genre;
 public class WishList extends Book{
     private LocalDate dateAdded;
 
-    public WishList(String isbn, LocalDateTime year, String title, ArrayList<Genre> genre, Category category,
-            String author, int stock, ArrayList<Review> review, ArrayList<BookQueue> queue, ArrayList<History> history,
+    public WishList(String isbn, int year, String title, Genre genre, Category category,
+            String author, int stock, String picPath, ArrayList<Review> review, ArrayList<BookQueue> queue, ArrayList<History> history,
             LocalDate dateAdded) {
-        super(isbn, year, title, genre, category, author, stock, review, queue, history);
+        super(isbn, year, title, genre, category, author, stock, picPath, review, queue, history);
         this.dateAdded = dateAdded;
     }
 

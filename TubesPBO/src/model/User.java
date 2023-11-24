@@ -8,7 +8,7 @@ public class User extends Person{
     private int warning;
     
     
-    public User(long id, String password, String name, String email, String phone, String picPath, String bio, ArrayList<Book> library, int warning) {
+    public User(int id, String password, String name, String email, String phone, String picPath, String bio, ArrayList<Book> library, int warning) {
         super(id, password, name, email, phone, picPath);
         this.bio = bio;
         this.library = library;

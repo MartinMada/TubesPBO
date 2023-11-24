@@ -4,11 +4,9 @@
  */
 package controller;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import controller.DatabaseHandler;
 import model.Admin;
 import model.Person;
 import model.User;

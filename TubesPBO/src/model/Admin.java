@@ -6,7 +6,7 @@ public class Admin extends Person{
     private ArrayList<Book> library;
     private ArrayList<Collection> collection;
     
-    public Admin(long id, String password, String name, String email, String phone, String picPath, ArrayList<Book> library,
+    public Admin(int id, String password, String name, String email, String phone, String picPath, ArrayList<Book> library,
             ArrayList<Collection> collection) {
         super(id, password, name, email, phone, picPath);
         this.library = library;
