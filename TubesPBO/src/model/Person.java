@@ -6,15 +6,15 @@ public class Person {
     private String name;
     private String email;
     private String phone;
-    private String pic_path;
+    private String picPath;
 
-    public Person(int id, String password, String name, String email, String phone, String pic_path) {
+    public Person(int id, String password, String name, String email, String phone, String picPath) {
         this.id = id;
         this.password = password;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.pic_path = pic_path;
+        this.picPath = picPath; 
     }
 
     public int getId() {
@@ -55,13 +55,15 @@ public class Person {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }        
 
-    public String getPic_Path() {
-        return pic_path;
+    }      
+
+    public String getPicPath() {
+        return picPath;
     }
 
-    public void setpic_path(String pic_path) {
-        this.pic_path = pic_path;
-    } 
+    public void setPicPath(String picPath) {
+        this.picPath = picPath;
+    }
+
 }

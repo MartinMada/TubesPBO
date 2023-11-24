@@ -1,12 +1,12 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class BookQueue {
-    private long idUser;
-    private LocalDate date;
+    private int idUser;
+    private LocalDateTime date;
     
-    public BookQueue(long idUser, LocalDate date) {
+    public BookQueue(int idUser, LocalDateTime date) {
         this.idUser = idUser;
         this.date = date;
     }
@@ -15,15 +15,15 @@ public class BookQueue {
         return idUser;
     }
 
-    public void setIdUser(long idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }    
 }

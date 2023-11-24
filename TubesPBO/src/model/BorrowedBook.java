@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -9,40 +8,38 @@ import model.Enum.Category;
 import model.Enum.Genre;
 
 public class BorrowedBook extends Book {
-    LocalDate dateReturn;
-    LocalDate dateBorrow;
-    Timer timer;
+    int idListBorrow;
+    LocalDateTime dateReturn;
+    LocalDateTime dateBorrow;
     
-    public BorrowedBook(String isbn, LocalDateTime year, String title, ArrayList<Genre> genre, Category category,
-            String author, int stock, ArrayList<Review> review, ArrayList<BookQueue> queue, ArrayList<History> history,
-            LocalDate dateReturn, LocalDate dateBorrow, Timer timer) {
-        super(isbn, year, title, genre, category, author, stock, review, queue, history);
+    public BorrowedBook(int idListBorrow, String isbn, int year, String title, Genre genre, Category category,
+            String author, int stock, String picPath, ArrayList<Review> review, ArrayList<BookQueue> queue, ArrayList<History> history,
+            LocalDateTime dateReturn, LocalDateTime dateBorrow) {
+        super(isbn, year, title, genre, category, author, stock, picPath, review, queue, history);
+        this.idListBorrow = idListBorrow;
         this.dateReturn = dateReturn;
         this.dateBorrow = dateBorrow;
-        this.timer = timer;
+
     }
 
-    public LocalDate getDateReturn() {
+    public int getIdListBorrow() {
+        return idListBorrow;
+    }
+
+    public LocalDateTime getDateReturn() {
         return dateReturn;
     }
 
-    public void setDateReturn(LocalDate dateReturn) {
+    public void setDateReturn(LocalDateTime dateReturn) {
         this.dateReturn = dateReturn;
     }
 
-    public LocalDate getDateBorrow() {
+    public LocalDateTime getDateBorrow() {
         return dateBorrow;
     }
 
-    public void setDateBorrow(LocalDate dateBorrow) {
+    public void setDateBorrow(LocalDateTime dateBorrow) {
         this.dateBorrow = dateBorrow;
     }
 
-    public Timer getTimer() {
-        return timer;
-    }
-
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }    
 }
