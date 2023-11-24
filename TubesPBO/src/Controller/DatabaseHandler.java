@@ -13,25 +13,13 @@ import javax.swing.JOptionPane;
  * @author marti
  */
 public class DatabaseHandler {
-    private static DatabaseHandler dbHandlerInstance;
-    
+
     public Connection con;
     private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost/book_library";
+    private String url = "jdbc:mysql://localhost/tubespbo";
+//    private String url = "jdbc:mysql://localhost/db_test?serverTimezone=" + TimeZone.getDefault().getID();
     private String username = "root";
     private String password = "";
-    
-//    SingletonManager.getInstance().setUser(new User());
-    
-    private DatabaseHandler() {
-    }
-
-    public static DatabaseHandler getInstance() {
-        if (dbHandlerInstance == null) {
-            dbHandlerInstance = new DatabaseHandler();
-        }
-        return dbHandlerInstance;
-    }
 
     private Connection logOn() {
         try {
