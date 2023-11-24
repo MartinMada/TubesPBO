@@ -59,7 +59,7 @@ public class Controller {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                person = new Person(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getString("email"), rs.getString("phone"));    
+                person = new Person(rs.getInt("id"), rs.getString("pass"), rs.getString("name"), rs.getString("email"), rs.getString("phone"), rs.getString("pic_path"));    
             }
 //            if (person != null) {
 //                Statement stmtUser = conn.con.createStatement();
@@ -76,28 +76,6 @@ public class Controller {
         return (person);
     }
     
-    // INSERT
-//    public boolean insertNewUser(User user) {
-//        conn.connect();
-//        String query = "INSERT INTO users VALUES(?,?,?,?,?)";
-//        try {
-//            PreparedStatement stmt = conn.con.prepareStatement(query);
-//            stmt.setInt(1, user.getId());
-//            stmt.setString(2, user.getName());
-//            stmt.setString(3, user.getAddress());
-//            stmt.setString(4, user.getPhone());
-//            stmt.setInt(5, user.getAge());
-//            stmt.executeUpdate();
-//            conn.disconnect();
-//            return (true);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            conn.disconnect();
-//            return (false);
-//        }
-//    }
-
-    // UPDATE
 //    public boolean updateUser(User user) {
 //        conn.connect();
 //        String query = "UPDATE users SET Name='" + user.getName() + "', "
