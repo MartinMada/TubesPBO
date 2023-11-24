@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Review {
-    private long idUser;
+    private int idUser;
     private int rating;
     private LocalDate date;
     private String content;
     private ArrayList<Comment> comment;
     
-    public Review(long idUser, int rating, LocalDate date, String content, ArrayList<Comment> comment) {
+    public Review(int idUser, int rating, LocalDate date, String content, ArrayList<Comment> comment) {
         this.idUser = idUser;
         this.rating = rating;
         this.date = date;
@@ -22,7 +22,7 @@ public class Review {
         return idUser;
     }
 
-    public void setIdUser(long idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 

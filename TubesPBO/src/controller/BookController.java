@@ -13,12 +13,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import model.Admin;
 import model.Book;
+import model.BookQueue;
 import model.BorrowedBook;
 import model.Enum.Category;
 import model.Enum.Genre;
 import model.Enum.SearchType;
 import model.History;
 import model.Person;
+import model.Review;
 import model.User;
 
 /**
@@ -263,5 +265,38 @@ public class BookController {
         }
         return result;
     }
-    
+    //Method getBookQueue mendapatkan queue buku
+    public ArrayList<BookQueue> getBookQueue (Book book) {
+        DatabaseHandler.getInstance().connect();
+        ArrayList<BookQueue> result = new ArrayList<>();
+        
+        String query = "SELECT * FROM bookqueue WHERE isbn='" + book.getIsbn() + "'";
+        try {
+            Statement stmt = DatabaseHandler.getInstance().con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                result.add(new BookQueue(rs.getInt("id_user"), rs.getTimestamp("date").toLocalDateTime()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    //Method getBookReview mendapatkan ulasan buku
+    public ArrayList<Review> getBookReview (Book book) {
+        DatabaseHandler.getInstance().connect();
+        ArrayList<Review> result = new ArrayList<>();
+        
+        String query = "SELECT * FROM review WHERE isbn='" + book.getIsbn() + "'";
+        try {
+            Statement stmt = DatabaseHandler.getInstance().con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                result.add(new Review(rs.getInt("id_user"), rs.getInt("rating"), rs.getDate("date").toLocalDate(), rs.getString("content"), null));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
