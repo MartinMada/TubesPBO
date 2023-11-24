@@ -1,0 +1,147 @@
+Action 
+
+1. judul buku : Wrath Becomes Her
+Genre : Action
+kategori buku : -
+penulis : Aden Polydoros
+isbn : 10001
+tahun terbit : 10 Oktober 2023
+
+2. judul buku : Without Limits
+Genre : Action
+kategori buku : -
+penulis : Reese Knightley
+isbn : 10002
+tahun terbit : 9 Oktober 2023
+
+3. judul buku : The Spirit Glass
+Genre : Action
+kategori buku : -
+penulis : Roshani Chokshi
+isbn : 10003
+tahun terbit : 5 September 2023
+
+==================================
+
+Comedy
+
+1. judul buku : Spy×Family 12
+Genre : Comedy
+kategori buku : -
+penulis : Tatsuya Endo
+isbn : 10004
+tahun terbit : 1 September 2023
+
+2. judul buku : Black Friend Essays
+Genre : Comedy
+kategori buku : -
+penulis : Ziwe
+isbn : 10005
+tahun terbit : 17 Oktober 2023
+
+3. judul buku : The Jolliest Bunch
+Genre : Danny Pellegrino
+kategori buku : -
+penulis : Danny Pellegrino
+isbn : 10006
+tahun terbit : 24 Oktober 2023
+
+==================================
+
+Fantasy
+
+1. judul buku : Sword Catcher
+Genre : Fantasy
+kategori buku : - 
+penulis : Cassandra Clara
+isbn : 10007
+tahun terbit : 10 Oktober 2023
+
+2. judul buku : A Court of Thorns and Roses
+Genre : Fantasy
+kategori buku : - 
+penulis : Sarah J. Maas
+isbn : 10008
+tahun terbit : 5 Mei 2015
+
+3. judul buku : The Name of the Wind
+Genre : Fantasy
+kategori buku : -
+penulis : Patrick Rothfuss
+isbn : 10009
+tahun terbit : 27 Maret 2023
+
+==================================
+
+Horror
+
+1. judul buku : Starling House
+Genre : Horror
+kategori buku : -
+penulis : Alix E. Harrow
+isbn : 10010
+tahun terbit : 3 Oktober 2023
+
+2. judul buku : Doctor Sleep
+Genre : Horror
+kategori buku : -
+penulis : Stephen King
+isbn : 10011
+tahun terbit : 24 September 2013
+
+3. judul buku : House of Leaves
+Genre : Horror
+kategori buku : -
+penulis : Mark Z. Danielewski
+isbn : 10012
+tahun terbit : 7 Mei 2023
+
+==================================
+
+Romance
+
+1. judul buku : Book Lovers
+Genre : Romance
+kategori buku : -
+penulis : Emily Henry
+isbn : 10013
+tahun terbit : 3 Mei 2022
+
+2. judul buku : The Kiss Quotient
+Genre : Romance
+kategori buku : -
+penulis : Helen Hoang
+isbn : 10014
+tahun terbit : 2 Juni 2018
+
+3. judul buku : Me Before You
+Genre : Romance
+kategori buku : -
+penulis : Joyo Moyes
+isbn : 10015
+tahun terbit : 31 Desember 2012
+
+==================================
+
+Slice Of Life
+
+1. judul buku : Legends & Lattes
+Genre : Slice Of Life
+kategori buku : 
+penulis : Travis Baldree
+isbn : 10016
+tahun terbit : 22 Februari 2022
+
+2. judul buku : Fangirl
+Genre : Slice Of Life
+kategori buku : - 
+penulis : Rainbow Rowell
+isbn : 10017
+tahun terbit : 10 September 2013
+
+3. judul buku : A Man Called Ove
+Genre : Slice Of Life
+kategori buku : -
+penulis : Fredrik Backman
+isbn : 10018
+tahun terbit : 27 Agustus 2012
