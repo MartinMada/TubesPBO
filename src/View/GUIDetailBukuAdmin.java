@@ -128,7 +128,7 @@ public class GUIDetailBukuAdmin {
         ulasan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GUIReview();
+                new GUIReview(ISBN);
             }
         });
         panel.add(ulasan,new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));

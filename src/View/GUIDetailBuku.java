@@ -53,9 +53,9 @@ public class GUIDetailBuku {
     private JMenuBar menubar;
     private JMenu menu1;
     private JButton ulasan;
-    
+    BookController bc = new BookController();
     public GUIDetailBuku(String ISBN,String pic_path){
-        BookController bc = new BookController();
+        
         frame = new JFrame("Detail Buku");
         frame.setSize(800, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,15 +97,21 @@ public class GUIDetailBuku {
         btnpinjam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"BERHASIL MEMINJAM BUKU!","INFO",JOptionPane.INFORMATION_MESSAGE);
-//                Book booktmp = bc.searchBook(ISBN);
+                Book booktmp = bc.searchBook(ISBN);
 //                System.out.println(ISBN);
 //                System.out.println(booktmp.getTitle());
-//                boolean pinjamBuku = bc.borrowBook(booktmp, (User) SingletonManager.getInstance().getPerson());
+                boolean pinjamBuku = bc.borrowBook(booktmp, (User) SingletonManager.getInstance().getPerson());
+                if (pinjamBuku) {
+                     JOptionPane.showMessageDialog(null,"BERHASIL MEMINJAM BUKU!","INFO",JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                     JOptionPane.showMessageDialog(null,"GAGAL MEMINJAM BUKU!","INFO",JOptionPane.WARNING_MESSAGE);
+                }
 //                System.out.println("BERHASIL");
+            
             }
         });
         panel.add(btnpinjam,new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        
         
         btnantri = new JButton("ANTRI");
         btnantri.setFont(new java.awt.Font("Bookman Old Style", 1, 16));
@@ -117,6 +123,16 @@ public class GUIDetailBuku {
             }
         });
         panel.add(btnantri,new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
+        
+        Book ableToBorrowBook = bc.searchBook(ISBN);
+        if (bc.ableToBorrow(ableToBorrowBook, (User) SingletonManager.getInstance().getPerson())) {
+            btnpinjam.setVisible(true);
+            btnantri.setVisible(false);
+        }else{
+            btnantri.setVisible(true);
+            btnpinjam.setVisible(false);
+        }
+        
         
         menubar = new JMenuBar();
         menu1 = new JMenu();
@@ -135,11 +151,12 @@ public class GUIDetailBuku {
         ulasan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GUIReview();
+                new GUIReview(ISBN);
             }
         });
         panel.add(ulasan,new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
-
+        
+        
         fetchDataFromDatabase(ISBN);
         
         frame.add(panel);

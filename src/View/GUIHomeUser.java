@@ -67,6 +67,7 @@ public class GUIHomeUser implements ActionListener {
     BookController bc = new BookController();
 
     public GUIHomeUser() {
+              
         frame = new JFrame("Home");
         frame.setSize(900, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -288,7 +289,7 @@ public class GUIHomeUser implements ActionListener {
             panelScifi.setVisible(false);
             panelHorror.setVisible(false);
             panelSol.setVisible(false);
-
+            
             frame.add(panelScifi);
             ArrayList<String> pathScifi = getImagePathsFromDatabase("SCI FI");
             ArrayList<String> isbnScifi = getISBNFromDatabase("SCI FI");
@@ -332,7 +333,7 @@ public class GUIHomeUser implements ActionListener {
         JTextField fieldBrowse = new JTextField();
         panelBaru.add(fieldBrowse, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 400, 20));
 
-        browsebtn = new JButton("Browse");
+        JButton browsebtn = new JButton("Browse");
         browsebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -343,7 +344,7 @@ public class GUIHomeUser implements ActionListener {
                 new GUIBookListUser(searchResults);
             }
         });
-        panel.add(browsebtn,new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
+        panelBaru.add(browsebtn,new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
 
         JLabel labelCollection1 = new JLabel("Popular " + genre);
         labelCollection1.setFont(new java.awt.Font("Bookman Old Style", 1, 16));

@@ -36,7 +36,7 @@ public class BookController {
         
         String query = "SELECT * FROM book WHERE " + searchType + "='" + search + "'";
         if(user != null) {
-            query += " AND isbn NOT IN (SELECT isbn FROM listborrow WHERE id_user=" + user.getId() + " AND TIMESTAMPDIFF(SECOND, date_borrow, NOW())<432000)";
+            query += " AND isbn NOT IN (SELECT isbn FROM listborrow WHERE id_user=" + user.getId() + " AND date_return IS NULL)";
         }
         try {
             Statement stmt = DatabaseHandler.getInstance().con.createStatement();
@@ -128,7 +128,7 @@ public class BookController {
         updateListBorrow();
         DatabaseHandler.getInstance().connect();
         ArrayList<Book> result = new ArrayList<>();
-        String querySelect = "SELECT lb.id_list_borrow, lb.isbn, (SELECT year FROM book WHERE isbn = lb.isbn) AS book_year, (SELECT title FROM book WHERE isbn = lb.isbn) AS book_title, (SELECT genre FROM book WHERE isbn = lb.isbn) AS book_genre, (SELECT category FROM book WHERE isbn = lb.isbn) AS book_category, (SELECT author FROM book WHERE isbn = lb.isbn) AS book_author, (SELECT stock FROM book WHERE isbn = lb.isbn) AS book_stock, (SELECT pic_path FROM book WHERE isbn = lb.isbn) AS book_pic_path, lb.date_borrow, lb.date_return FROM listborrow lb WHERE lb.id_user='" + user.getId() + "' AND TIMESTAMPDIFF(SECOND, lb.date_borrow, NOW())<432000 AND lb.date_return=NULL)";
+        String querySelect = "SELECT lb.id_list_borrow, lb.isbn, (SELECT year FROM book WHERE isbn = lb.isbn) AS book_year, (SELECT title FROM book WHERE isbn = lb.isbn) AS book_title, (SELECT genre FROM book WHERE isbn = lb.isbn) AS book_genre, (SELECT category FROM book WHERE isbn = lb.isbn) AS book_category, (SELECT author FROM book WHERE isbn = lb.isbn) AS book_author, (SELECT stock FROM book WHERE isbn = lb.isbn) AS book_stock, (SELECT pic_path FROM book WHERE isbn = lb.isbn) AS book_pic_path, lb.date_borrow, lb.date_return FROM listborrow lb WHERE lb.id_user='" + user.getId() + "' AND TIMESTAMPDIFF(SECOND, lb.date_borrow, NOW())<432000 AND lb.date_return IS NULL)";
     
         try {
             
@@ -158,7 +158,7 @@ public class BookController {
     //Method pembantu getListBorrow dan ableToBorrow, untuk update listborrow database jika ada listborrow yang lebih dari 5 hari, dilakukan pengecekan queue buku tersebut
     private void updateListBorrow () {
         DatabaseHandler.getInstance().connect();
-        String querySelect = "SELECT id_list_borrow, isbn FROM listborrow WHERE TIMESTAMPDIFF(SECOND, date_borrow, NOW())>=432000 AND date_return = NULL;";
+        String querySelect = "SELECT id_list_borrow, isbn FROM listborrow WHERE TIMESTAMPDIFF(SECOND, date_borrow, NOW())>=432000 AND date_return IS NULL;";
         
         try {
             Statement stmt = DatabaseHandler.getInstance().con.createStatement();
@@ -174,18 +174,40 @@ public class BookController {
 
     }
     //Method ableToBorrow mengecek apakah bisa meminjam buku tersebut
-    public boolean ableToBorrow(Book book) {
+//    public boolean ableToBorrow(Book book) {
+//        updateListBorrow();
+//        DatabaseHandler.getInstance().connect();
+//        String querySelect = "SELECT COUNT(id_list_borrow) AS result FROM listborrow WHERE isbn='"+ book.getIsbn() +"' AND date_return = NULL;";
+//        
+//        try {
+//            Statement stmt = DatabaseHandler.getInstance().con.createStatement();
+//            ResultSet rsSelect = stmt.executeQuery(querySelect);
+//            
+//            while(rsSelect.next()) {
+//                if(rsSelect.getInt("result")< book.getStock()) {
+//                    return true;
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
+    public boolean ableToBorrow(Book book, User user) {
         updateListBorrow();
         DatabaseHandler.getInstance().connect();
-        String querySelect = "SELECT COUNT(id_list_borrow) AS result FROM listborrow WHERE isbn='"+ book.getIsbn() +"'AND TIMESTAMPDIFF(SECOND, date_borrow, NOW())<432000 AND date_return = NULL;";
-        
+        String querySelect = "SELECT COUNT(id_list_borrow) AS result FROM listborrow WHERE isbn='"+ book.getIsbn() +"' AND date_return IS NULL";
+
         try {
             Statement stmt = DatabaseHandler.getInstance().con.createStatement();
             ResultSet rsSelect = stmt.executeQuery(querySelect);
-            
+
             while(rsSelect.next()) {
                 if(rsSelect.getInt("result")< book.getStock()) {
-                    return true;
+                    String querySelect2 = "SELECT id_user FROM listborrow WHERE isbn='"+ book.getIsbn() +"' AND date_return = NULL AND id_user = " + user.getId() + ";";
+                    Statement stmt2 = DatabaseHandler.getInstance().con.createStatement();
+                    ResultSet rsSelect2 = stmt2.executeQuery(querySelect2);
+                    return !rsSelect2.next();
                 }
             }
         } catch (SQLException e) {
@@ -215,7 +237,7 @@ public class BookController {
     }
     //Method untuk meminjam buku, dilakukan ableToBorrow(), jika bisa maka langsung insert data ke database
     public boolean borrowBook (Book book, User user) {
-        if (!ableToBorrow(book)) {return false;}
+        if (!ableToBorrow(book,user)) {return false;}
         DatabaseHandler.getInstance().connect();
         String query = "INSERT INTO listborrow (isbn, id_user, date_borrow) VALUES(?,?,?)";
         try {
@@ -233,7 +255,7 @@ public class BookController {
     }
     //Method untuk mengantri jika diluar method ini dilakukan pengecekan ableToBorrow dan hasilnya false, maka tampilkan tombol mengantri dan isinya memanggil method ini
     public boolean addBookQueue (Book book, User user) {
-        if (ableToBorrow(book)) {return false;}
+        if (ableToBorrow(book,user)) {return false;}
         DatabaseHandler.getInstance().connect();
         String query = "INSERT INTO bookqueue (isbn, id_user, date_borrow) VALUES(?,?,?)";
         try {

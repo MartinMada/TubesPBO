@@ -32,6 +32,7 @@ public class GUILogin {
     private JLabel labelEmail;
     private JLabel labelPass;
     private JButton loginbtn;
+    private JButton backbtn;
     
     
     public GUILogin(){
@@ -85,7 +86,16 @@ public class GUILogin {
                 }
             }
         });
+
+        backbtn = new JButton("Back");
+        backbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new GUIHomeGuest();
+            }
+        });
         panel.add(loginbtn,new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        panel.add(backbtn,new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
 
         frame.add(panel);
         frame.setVisible(true);
